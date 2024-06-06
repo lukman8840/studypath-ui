@@ -7,6 +7,7 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import List from './List';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../src/assets/loading.json';
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface Topics {
   id: number;
@@ -21,6 +22,7 @@ const initialValues = {
   link: '',
 };
 
+const baseUrl = import.meta.env.VITE_BASEURL;
 function App() {
   const [topics, setTopics] = useState<Topics[]>([]);
   const [topic, setTopic] = useState('');
@@ -33,7 +35,7 @@ function App() {
   const generateToc = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/learn', {
+      const response = await fetch(`${baseUrl}/learn`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +112,7 @@ function App() {
 
   useEffect(() => {
     if (error !== '') {
-      alert(error);
+      alert(`Try again :, ${error}`);
     }
   }, [error]);
 

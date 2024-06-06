@@ -8,6 +8,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.montserrat {
+  font-family: 'Montserrat', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
 body {
   background: #dde1e7;
   /* color: #fff; */
@@ -21,7 +27,7 @@ body {
 
 .checkbox-wrapper-56 .container input {
   opacity: 1;
-  /* -webkit-appearance: none; */
+  -webkit-appearance: none;
   cursor: pointer;
   height: 50px;
   width: 50px;

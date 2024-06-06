@@ -1,7 +1,7 @@
 import { Button, Card } from './app.style';
 import { MdDeleteSweep } from 'react-icons/md';
 import { TbEdit } from 'react-icons/tb';
-import { Topics } from './App';
+import { Topics } from './common';
 
 interface ListProps {
   data: Topics[];
@@ -20,7 +20,7 @@ function List({
 }: ListProps) {
   return (
     <>
-      {data?.map((item) => {
+      {data.map((item) => {
         return (
           <>
             <Card>
