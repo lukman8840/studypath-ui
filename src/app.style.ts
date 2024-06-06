@@ -28,10 +28,31 @@ export const Main = styled.main`
   grid-template-columns: 80% 20%;
   grid-template-rows: 0.2fr 1fr;
   .header {
-    /* background: red; */
     height: 70px;
     display: flex;
     align-items: center;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: start;
+      height: auto;
+      position: relative;
+      input {
+        width: 100%;
+        height: 50px;
+        box-sizing: border-box;
+      }
+      .select-container {
+        margin: 20px 0px;
+        float: left;
+      }
+      button {
+        margin: 0px 0px;
+        float: right;
+        position: absolute;
+        bottom: 20px;
+        right: 0px;
+      }
+    }
   }
   .list {
     /* background: green; */

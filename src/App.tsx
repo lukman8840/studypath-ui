@@ -7,14 +7,10 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import List from './List';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../src/assets/loading.json';
+import Robot from '../src/assets/laptop.json';
 import 'react-toastify/dist/ReactToastify.css';
+import { Topics } from './common';
 
-export interface Topics {
-  id: number;
-  title: string;
-  isDone: boolean;
-  link: string;
-}
 const initialValues = {
   id: 0,
   title: '',
@@ -31,6 +27,12 @@ function App() {
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (error !== '') {
+      alert(`Try again :, ${error}`);
+    }
+  }, [error]);
 
   const generateToc = async () => {
     setLoading(true);
@@ -50,8 +52,6 @@ function App() {
         setLoading(false);
         setError(response.statusText);
         setError('');
-
-        console.log('NOT OK::', response);
         throw new Error('Network response was not ok');
       }
 
@@ -110,12 +110,6 @@ function App() {
     setSelect(event.target.value);
   };
 
-  useEffect(() => {
-    if (error !== '') {
-      alert(`Try again :, ${error}`);
-    }
-  }, [error]);
-
   return (
     <>
       <Nav>
@@ -157,6 +151,12 @@ function App() {
                 loop={true}
               />
             </>
+          ) : topics.length === 0 ? (
+            <Lottie
+              animationData={Robot}
+              style={{ height: '50vh' }}
+              loop={true}
+            />
           ) : (
             <List
               data={topics}
