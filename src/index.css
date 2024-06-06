@@ -21,7 +21,7 @@ body {
 
 .checkbox-wrapper-56 .container input {
   opacity: 1;
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   cursor: pointer;
   height: 50px;
   width: 50px;
