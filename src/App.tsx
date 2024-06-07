@@ -10,6 +10,8 @@ import loadingAnimation from '../src/assets/loading.json';
 import Robot from '../src/assets/laptop.json';
 import 'react-toastify/dist/ReactToastify.css';
 import { Topics } from './common';
+import { TypeAnimation } from 'react-type-animation';
+import { toast } from 'react-toastify';
 
 const initialValues = {
   id: 0,
@@ -30,13 +32,18 @@ function App() {
 
   useEffect(() => {
     if (error !== '') {
-      alert(`Try again :, ${error}`);
+      toast.error(`Try again :, ${error}`);
     }
   }, [error]);
 
   const generateToc = async () => {
+    if (!topic) {
+      toast.info('Please provide a topic');
+      return;
+    }
     setLoading(true);
     try {
+      setTopic('');
       const response = await fetch(`${baseUrl}/learn`, {
         method: 'POST',
         headers: {
@@ -78,6 +85,10 @@ function App() {
   };
 
   const updateTopic = () => {
+    if (!currentTopic.title) {
+      toast.info('Can not clear a step to empty');
+      return;
+    }
     const updatedValues = topics.map((item) => {
       if (item.id === currentTopic.id) {
         return { ...item, title: currentTopic.title };
@@ -152,11 +163,29 @@ function App() {
               />
             </>
           ) : topics.length === 0 ? (
-            <Lottie
-              animationData={Robot}
-              style={{ height: '50vh' }}
-              loop={true}
-            />
+            <>
+              <Lottie
+                animationData={Robot}
+                style={{ height: '50vh' }}
+                loop={true}
+              />
+              <TypeAnimation
+                sequence={[
+                  'StudyPath: Your journey begins here!',
+                  1000, // wait 1s before changing to the next step
+                  'Breaking down complex topics into simple steps.',
+                  1000,
+                  'Guiding you through each stage of your learning path.',
+                  1000,
+                  'Achieve your goals with personalized study guides.',
+                  1000,
+                ]}
+                wrapper='span'
+                speed={50}
+                style={{ display: 'inline-block' }}
+                repeat={Infinity}
+              />
+            </>
           ) : (
             <List
               data={topics}
