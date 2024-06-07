@@ -4,10 +4,6 @@ export const Nav = styled.main`
   margin: 20px auto;
   width: 85%;
   background: #dde1e7;
-  h4 {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
   h4::first-letter {
     color: #3e98c7;
     font-size: 2em;
@@ -16,8 +12,6 @@ export const Nav = styled.main`
 
 export const Main = styled.main`
   margin: 10px auto;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   width: 90%;
   box-sizing: border-box;
   gap: 10px;
