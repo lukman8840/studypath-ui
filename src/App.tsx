@@ -66,6 +66,7 @@ function App() {
       setTopics([]);
     }
   }, []);
+
   const generateToc = async () => {
     if (!topic) {
       toast.info('Please provide a topic');
@@ -113,6 +114,7 @@ function App() {
     });
 
     setTopics(updatedValues);
+    storeTopics(updatedValues);
   };
 
   const updateTopic = () => {
@@ -128,6 +130,7 @@ function App() {
       }
     });
     setTopics(updatedValues);
+    storeTopics(updatedValues);
     setEdit(false);
     setCurrentTopic(initialValues);
   };
