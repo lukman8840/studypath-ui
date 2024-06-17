@@ -20,10 +20,11 @@ function List({
 }: ListProps) {
   return (
     <>
-      {data.map((item) => {
-        return (
-          <>
-            <Card>
+      <div>
+        <h1>Topics</h1>
+        {Array.isArray(data) ? (
+          data.map((item) => (
+            <Card key={item.id}>
               <div className='title'>
                 <div className='checkbox-wrapper-56'>
                   <label className='container'>
@@ -35,7 +36,7 @@ function List({
                     <div className='checkmark'></div>
                   </label>
                 </div>
-                <a target='_blank' href={item.link}>
+                <a target='_blank' href={item.link} rel='noopener noreferrer'>
                   {item.title}
                 </a>
               </div>
@@ -54,9 +55,11 @@ function List({
                 </Button>
               </div>
             </Card>
-          </>
-        );
-      })}
+          ))
+        ) : (
+          <p>No topics available</p>
+        )}
+      </div>
     </>
   );
 }

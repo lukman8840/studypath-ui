@@ -20,6 +20,17 @@ const initialValues = {
   link: '',
 };
 
+const storeTopics = (topics: Topics[]) => {
+  try {
+    localStorage.setItem('items', JSON.stringify(topics));
+  } catch (error) {
+    console.error('Error storing items to localStorage', error);
+  }
+};
+
+const clearLocalStorage = () => {
+  localStorage.removeItem('items');
+};
 const baseUrl = import.meta.env.VITE_BASEURL;
 function App() {
   const [topics, setTopics] = useState<Topics[]>([]);
@@ -36,6 +47,25 @@ function App() {
     }
   }, [error]);
 
+  useEffect(() => {
+    try {
+      const items = localStorage.getItem('items');
+
+      if (items) {
+        let parsedItems: Topics[] = JSON.parse(items);
+
+        // Check if parsedItems is a string, indicating a double JSON string issue
+        if (typeof parsedItems === 'string') {
+          parsedItems = JSON.parse(parsedItems);
+        }
+
+        setTopics(parsedItems);
+      }
+    } catch (error) {
+      clearLocalStorage();
+      setTopics([]);
+    }
+  }, []);
   const generateToc = async () => {
     if (!topic) {
       toast.info('Please provide a topic');
@@ -63,6 +93,7 @@ function App() {
       }
 
       const data = await response.json();
+      storeTopics(data.text);
       const parsedTopics = JSON.parse(data.text);
       setTopics(parsedTopics);
       setLoading(false);
@@ -107,12 +138,15 @@ function App() {
     setTopic(value);
   };
   const deleteTopic = (id: number) => {
-    const filteredTodo = topics.filter((item) => item.id !== id);
+    const filteredTodo = topics?.filter((item) => item.id !== id);
     setTopics(filteredTodo);
   };
 
-  const completedTopics = topics.filter((task) => task.isDone).length;
-  const totalTopics = topics.length;
+  // const completedTopics = topics?.filter((task) => task.isDone).length;
+  const completedTopics = Array.isArray(topics)
+    ? topics.filter((task) => task.isDone).length
+    : 0;
+  const totalTopics = topics?.length;
   const progress = Math.floor((completedTopics / totalTopics) * 100);
 
   const handleSelectChange = (event: {
@@ -162,7 +196,7 @@ function App() {
                 loop={true}
               />
             </>
-          ) : topics.length === 0 ? (
+          ) : topics?.length === 0 ? (
             <>
               <Lottie
                 animationData={Robot}
@@ -188,7 +222,7 @@ function App() {
             </>
           ) : (
             <List
-              data={topics}
+              data={topics || []}
               deleteTopic={deleteTopic}
               markAsDone={markAsDone}
               setCurrentTopic={setCurrentTopic}
