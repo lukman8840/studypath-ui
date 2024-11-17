@@ -1,7 +1,7 @@
-import { Button, Card } from './app.style';
-import { MdDeleteSweep } from 'react-icons/md';
-import { TbEdit } from 'react-icons/tb';
-import { Topics } from './common';
+import { Button, Card } from "./app.style";
+import { MdDeleteSweep } from "react-icons/md";
+import { TbEdit } from "react-icons/tb";
+import { Topics } from "./common";
 
 interface ListProps {
   data: Topics[];
@@ -11,32 +11,22 @@ interface ListProps {
   deleteTopic: (id: number) => void;
 }
 
-function List({
-  data,
-  setEdit,
-  markAsDone,
-  setCurrentTopic,
-  deleteTopic,
-}: ListProps) {
+function List({ data, setEdit, markAsDone, setCurrentTopic, deleteTopic }: ListProps) {
   return (
     <>
       <div>
-        <h1>Topics</h1>
+        <h3>Break-down</h3>
         {Array.isArray(data) ? (
           data.map((item) => (
             <Card key={item.id}>
-              <div className='title'>
-                <div className='checkbox-wrapper-56'>
-                  <label className='container'>
-                    <input
-                      onChange={() => markAsDone(item.id)}
-                      checked={item.isDone}
-                      type='checkbox'
-                    />
-                    <div className='checkmark'></div>
+              <div className="title">
+                <div className="checkbox-wrapper-56">
+                  <label className="container">
+                    <input onChange={() => markAsDone(item.id)} checked={item.isDone} type="checkbox" />
+                    <div className="checkmark"></div>
                   </label>
                 </div>
-                <a target='_blank' href={item.link} rel='noopener noreferrer'>
+                <a target="_blank" href={item.link} rel="noopener noreferrer">
                   {item.title}
                 </a>
               </div>
@@ -50,7 +40,7 @@ function List({
                 >
                   <TbEdit size={20} />
                 </Button>
-                <Button type='submit' onClick={() => deleteTopic(item.id)}>
+                <Button type="submit" onClick={() => deleteTopic(item.id)}>
                   <MdDeleteSweep size={20} />
                 </Button>
               </div>
