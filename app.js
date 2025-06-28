@@ -26,7 +26,8 @@ app.use("/auth", authRouter);
 // MongoDB connection with proper error handling
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || "mongodb+srv://[your-connection-string]";
+    const mongoURI = process.env.MONGODB_URI;
+    // const mongoURI = process.env.MONGODB_URI || "mongodb+srv://[your-connection-string]";
     await mongoose.connect(mongoURI);
     console.log("MongoDB connected successfully");
   } catch (err) {
