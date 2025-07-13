@@ -196,7 +196,7 @@ function App() {
   return (
     <>
       <Nav>
-        <h4>StudyPath</h4>
+        <h4>LearnFlow</h4>
       </Nav>
 
       <Main>
@@ -209,9 +209,9 @@ function App() {
           />
           <div className="select-container">
             <Select className="custom-select" value={select} onChange={(e) => setSelect(e.target.value)}>
-              <option value="Beginner">Beginner</option>
+              <option value="Beginner">Starter</option>
               <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
+              <option value="Advanced">Expert</option>
             </Select>
           </div>
 
